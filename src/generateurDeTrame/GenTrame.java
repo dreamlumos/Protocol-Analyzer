@@ -7,8 +7,9 @@ import java.io.IOException;
 import composant.Trame;
 
 public class GenTrame {
-	public static void FileToTrames(Trames trames) throws IOException {
-		String file = "data/TestFile.txt";
+	
+	public static void FileToTrames(Trames trames, String file) throws IOException {
+		
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line = br.readLine();
 		String line2;
@@ -16,11 +17,14 @@ public class GenTrame {
 		String[] lignecourante;
 		String[] lignesuivante=null;
 		int positionOffset=0;
-		int nbrOctets = 0;//nombres d'octets pour chaque ligne
-		while (line !=null) {
+		int nbrOctets = 0; //nombres d'octets pour chaque ligne
+		
+		while (line != null) {
+			
 			lignecourante = line.split("[ ]+");
+			
 			if(lignecourante.length!=0 && isOffset(lignecourante[0], "")) {
-				//Premiere ligne de la tramme (le offset est egale à zero)
+				//Premiere ligne de la tramme (le offset est egale a zero)
 				if((Integer.parseInt(lignecourante[0], 16))==0) {
 					if(tram!=null) {
 						if(!trames.getTrames().contains(tram))
@@ -120,7 +124,7 @@ public class GenTrame {
 		br.close();
 	}
 			
-	//permet de tester si c'est un octet en hexa
+	/* Teste si c'est un octet en hexa */
 	private static boolean isOctet(String s) { 
 		if(s.length()==2) {
 			char lettre1= s.charAt(0);
@@ -131,9 +135,10 @@ public class GenTrame {
 		}
 		return false;
 	}
-	//pour vérifier si offset est correcte , convention de string vide pour la premiere ligne de la trame
+	
+	/* Verifie si offset est correct, convention de string vide pour la premiere ligne de la trame */
 	private static boolean isOffset(String offset, String offsetavant) {
-		if (offset=="")return false;
+		if (offset=="") return false;
 		try {
 			Integer.parseInt(offset,16);
 		}

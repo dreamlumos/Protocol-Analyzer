@@ -9,9 +9,10 @@ public class Test {
 	public static void main (String[]args) {
 		
 		Trames trames = new Trames();
+		String file = "data/TestHTTP.txt";
 		
 		try {
-			GenTrame.FileToTrames(trames);
+			GenTrame.FileToTrames(trames, file);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
