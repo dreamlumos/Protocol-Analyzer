@@ -5,15 +5,18 @@ import java.util.ArrayList;
 import composant.Trame;
 
 public class Trames {
-	private ArrayList<Trame> Trames;
+	
+	private ArrayList<Trame> trames;
+	
 	public Trames() {
-		Trames= new ArrayList<>();
+		trames = new ArrayList<>();
 	}
-	public boolean addTrame(Trame e) {
-		return Trames.add(e);
+	
+	public boolean addTrame(Trame t) {
+		return trames.add(t);
 	}
 	
 	public ArrayList<Trame> getTrames(){
-		return Trames;
+		return trames;
 	}
 }
