@@ -1,4 +1,4 @@
-package composant;
+package Composant;
 
 import java.util.HashMap;
 
@@ -25,9 +25,13 @@ public class Ethernet {
 	}
 	@Override
 	public String toString() {
-		return "Ethernet [trame=" + trame +", macSource=" + macSource + ", macDest="
-				+ macDest + ", protocole=" + protocole + "]";
-	}
+		StringBuilder ch = new StringBuilder();
+		ch.append("\tDestination : ").append(macDest.toString()).append(" \n\tSource : ").append(macSource).append(" \n\tType : ").append(dictionnary.get(protocole.toString())).append(" (0x").append(protocole).append(")\n");
+		return "Ethernet II, Src: "+macSource.toString()+" Dst: "+macDest+"\n"+ch.toString();
+		}
+
+	
 	
 
 }
+
