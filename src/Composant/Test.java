@@ -1,5 +1,4 @@
 package Composant;
-
 import java.io.IOException;
 
 import Generateurdetrame.GenTrame;
@@ -15,7 +14,7 @@ public static void main (String[]args) {
 		}
 		for(Trame tram2 : trames.getTrames()) {
 			System.out.println(tram2.toString());
-			
+			System.out.println(tram2.affichetrame()+tram2.ethernet()+tram2.iPv4()+tram2.tcp());
 		}
 	
 	}
