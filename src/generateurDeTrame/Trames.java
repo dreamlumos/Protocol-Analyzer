@@ -1,13 +1,13 @@
-package Generateurdetrame;
+package generateurDeTrame;
 
 import java.util.ArrayList;
 
-import Composant.Trame;
+import composant.Trame;
 
 public class Trames {
 	private ArrayList<Trame> Trames;
 	public Trames() {
-		Trames= new ArrayList<Trame>();
+		Trames= new ArrayList<>();
 	}
 	public boolean addTrame(Trame e) {
 		return Trames.add(e);

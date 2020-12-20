@@ -1,10 +1,10 @@
-package Composant;
+package composant;
 
 import java.util.HashMap;
 
 public class Ethernet {
 	private Trame trame;
-	private HashMap<String, String> dictionnary = new HashMap<String, String>();
+	private HashMap<String, String> dictionnary = new HashMap<>();
 	private StringBuilder macSource = new StringBuilder();
 	private StringBuilder macDest = new StringBuilder();
 	private StringBuilder protocole = new StringBuilder();

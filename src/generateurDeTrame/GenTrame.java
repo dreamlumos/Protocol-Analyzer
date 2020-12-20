@@ -1,10 +1,10 @@
-package Generateurdetrame;
+package generateurDeTrame;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import Composant.Trame;
+import composant.Trame;
 
 public class GenTrame {
 	public static void FileToTrames(Trames trames) throws IOException {

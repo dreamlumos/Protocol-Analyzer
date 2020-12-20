@@ -1,4 +1,4 @@
-package Composant;
+package composant;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ public class Trame {
 		nombredetrames++;
 		numerotrame=nombredetrames;
 		tramevalide=true;
-		octets = new ArrayList<String>();
+		octets = new ArrayList<>();
 		offsets= new int[1526];
 		for(int i = 0;i <1526;i++) {
 			offsets[i] = 0;
@@ -86,7 +86,7 @@ public class Trame {
 	}
 	public String ethernet() {
 		if (tramevalide) {
-		HashMap<String, String> dictionnary = new HashMap<String, String>();
+		HashMap<String, String> dictionnary = new HashMap<>();
 		dictionnary.put("0800", "IPV4");
 		dictionnary.put("0806", "ARP");
 		dictionnary.put("0805", "X.25 niveau 3");
@@ -210,7 +210,7 @@ public class Trame {
 	
 	public String tcp() {
 		if (tramevalide && (octets.get(12)+octets.get(13)).equals("0800") ) {//trame complete et ipv4
-		HashMap<String, String> dictionnary = new HashMap<String, String>();
+		HashMap<String, String> dictionnary = new HashMap<>();
 		dictionnary.put("002", "(SYN)");
 		dictionnary.put("010", "(ACK)");
 		dictionnary.put("012", "(SYN, ACK)");
@@ -252,7 +252,7 @@ public class Trame {
 		return "";
 	}
 	public String flagsTcp(String s) {
-		HashMap<Integer, String> dictionnary = new HashMap<Integer, String>();
+		HashMap<Integer, String> dictionnary = new HashMap<>();
 		dictionnary.put(0, "Not set");
 		dictionnary.put(1, "Set");
 		StringBuilder sb = new StringBuilder();
