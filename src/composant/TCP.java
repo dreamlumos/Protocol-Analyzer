@@ -68,21 +68,21 @@ public class TCP {
 		
 		if (s == null) return "";
 		
-		HashMap<Integer, String> dictionnary = new HashMap<>();
-		dictionnary.put(0, "Not set");
-		dictionnary.put(1, "Set");
+		HashMap<Integer, String> dict = new HashMap<>();
+		dict.put(0, "Not set");
+		dict.put(1, "Set");
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("\n\t\t"+s.charAt(0)+s.charAt(1)+s.charAt(2)+". .... = Reserved "+dictionnary.get(Integer.parseInt(""+s.charAt(0)+s.charAt(1)+s.charAt(2),2)));
-		sb.append("\n\t\t..."+s.charAt(3)+" .... .... = Nonce: "+dictionnary.get(Integer.parseInt(""+s.charAt(3),2)));
-		sb.append("\n\t\t.... "+s.charAt(4)+"... .... = Congestion Window Reduced (CMR): "+dictionnary.get(Integer.parseInt(""+s.charAt(4),2)));
-		sb.append("\n\t\t.... ."+s.charAt(5)+".. .... = ECN-Echo: "+dictionnary.get(Integer.parseInt(""+s.charAt(5),2)));
-		sb.append("\n\t\t.... .."+s.charAt(6)+". .... = Urgent: "+dictionnary.get(Integer.parseInt(""+s.charAt(6),2)));
-		sb.append("\n\t\t.... ..."+s.charAt(7)+" .... = Acknowledgment: "+dictionnary.get(Integer.parseInt(""+s.charAt(7),2)));
-		sb.append("\n\t\t.... .... "+s.charAt(8)+"... = Push: "+dictionnary.get(Integer.parseInt(""+s.charAt(8),2)));
-		sb.append("\n\t\t.... .... ."+s.charAt(9)+".. = Reset: "+dictionnary.get(Integer.parseInt(""+s.charAt(9),2)));
-		sb.append("\n\t\t.... .... .."+s.charAt(10)+". = Syn: "+dictionnary.get(Integer.parseInt(""+s.charAt(10),2)));
-		sb.append("\n\t\t.... .... ..."+s.charAt(11)+" = Fin: "+dictionnary.get(Integer.parseInt(""+s.charAt(11),2)));
+		sb.append("\n\t\t"+s.charAt(0)+s.charAt(1)+s.charAt(2)+". .... = Reserved "+dict.get(Integer.parseInt(""+s.charAt(0)+s.charAt(1)+s.charAt(2),2)));
+		sb.append("\n\t\t..."+s.charAt(3)+" .... .... = Nonce: "+dict.get(Integer.parseInt(""+s.charAt(3),2)));
+		sb.append("\n\t\t.... "+s.charAt(4)+"... .... = Congestion Window Reduced (CMR): "+dict.get(Integer.parseInt(""+s.charAt(4),2)));
+		sb.append("\n\t\t.... ."+s.charAt(5)+".. .... = ECN-Echo: "+dict.get(Integer.parseInt(""+s.charAt(5),2)));
+		sb.append("\n\t\t.... .."+s.charAt(6)+". .... = Urgent: "+dict.get(Integer.parseInt(""+s.charAt(6),2)));
+		sb.append("\n\t\t.... ..."+s.charAt(7)+" .... = Acknowledgment: "+dict.get(Integer.parseInt(""+s.charAt(7),2)));
+		sb.append("\n\t\t.... .... "+s.charAt(8)+"... = Push: "+dict.get(Integer.parseInt(""+s.charAt(8),2)));
+		sb.append("\n\t\t.... .... ."+s.charAt(9)+".. = Reset: "+dict.get(Integer.parseInt(""+s.charAt(9),2)));
+		sb.append("\n\t\t.... .... .."+s.charAt(10)+". = Syn: "+dict.get(Integer.parseInt(""+s.charAt(10),2)));
+		sb.append("\n\t\t.... .... ..."+s.charAt(11)+" = Fin: "+dict.get(Integer.parseInt(""+s.charAt(11),2)));
 		sb.append("\n\t\t[TCP Flags:");
 		if((""+s.charAt(0)+s.charAt(1)+s.charAt(2))=="001") 
 			sb.append("R");

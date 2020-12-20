@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Ethernet {
 	
 	private Trame trame;
-	private HashMap<String, String> dictionnary = new HashMap<>();
+	private HashMap<String, String> dictionary = new HashMap<>();
 	private StringBuilder macSource = new StringBuilder();
 	private StringBuilder macDest = new StringBuilder();
 	private StringBuilder protocole = new StringBuilder();
@@ -18,9 +18,9 @@ public class Ethernet {
 		
 		this.trame=trame;
 		
-		dictionnary.put("0800", "IPV4");
-		dictionnary.put("0806", "ARP");
-		dictionnary.put("0805", "X.25 niveau 3");
+		dictionary.put("0800", "IPV4");
+		dictionary.put("0806", "ARP");
+		dictionary.put("0805", "X.25 niveau 3");
 		protocole.append(trame.getOctets().get(12)).append(trame.getOctets().get(13));
 		
 		for(int i = 0; i<6;i++) {
@@ -36,7 +36,7 @@ public class Ethernet {
 	@Override
 	public String toString() {
 		StringBuilder ch = new StringBuilder();
-		ch.append("\tDestination : ").append(macDest.toString()).append(" \n\tSource : ").append(macSource).append(" \n\tType : ").append(dictionnary.get(protocole.toString())).append(" (0x").append(protocole).append(")\n");
+		ch.append("\tDestination : ").append(macDest.toString()).append(" \n\tSource : ").append(macSource).append(" \n\tType : ").append(dictionary.get(protocole.toString())).append(" (0x").append(protocole).append(")\n");
 		return "Ethernet II, Src: "+macSource.toString()+" Dst: "+macDest+"\n"+ch.toString();
 	}
 
