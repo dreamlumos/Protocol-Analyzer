@@ -257,6 +257,6 @@ public class TCP {
 		sb.append("\n\tChecksum: 0x"+checksum);
 		sb.append("\n\tUrgent Pointer: "+urgent);
 	
-		return"\nTransmission Control Protocol, Src Port: "+sourcePort+", Dst Port: "+destPort+", Seq: "+sequenceNumber+", Len: "+len+sb.toString()+options();
+		return "\nTransmission Control Protocol, Src Port: "+sourcePort+", Dst Port: "+destPort+", Seq: "+sequenceNumber+", Len: "+len+sb.toString()+options();
 	}
 }

@@ -34,10 +34,10 @@ public class IPV4 {
 	}
 	
 	public String extBit(String s, int taille) { //extension non signé sur taille bits
-		String sb =s;
+		String sb = s;
 		
-		for (int i=0;i<taille-s.length() ; i++) {
-			sb="0"+sb;
+		for (int i = 0; i<taille-s.length(); i++) {
+			sb = "0"+sb;
 		}
 		return sb;
 	}
@@ -95,8 +95,8 @@ public class IPV4 {
 		
 		StringBuilder option = new StringBuilder();
 		if (tailleentete > 20) {
-			int position=34;
-			sb.append("\n\tOptions :");
+			int position = 34;
+			option.append("\n\tOptions :");
 			int op;
 			int tailleOp = 0 ;
 			
