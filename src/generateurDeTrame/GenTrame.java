@@ -95,7 +95,6 @@ public class GenTrame {
 							}
 						}
 						}catch(IndexOutOfBoundsException e) {
-							System.out.println("ok");
 							tram.trameInvalide(positionOffset);
 							positionOffset=0;
 						}

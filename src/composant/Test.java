@@ -21,9 +21,7 @@ public class Test {
 		for(Trame tram2 : trames.getTrames()) {
 			
 			try {
-				System.out.println(tram2.toString());
-				//System.out.println(tram2.affichetrame()+tram2.ethernet()+tram2.iPv4()+tram2.tcp());
-				
+				System.out.println(tram2.toString());				
 				System.out.println(new Ethernet(tram2).toString());
 				System.out.println(new IPV4(tram2).toString());
 				System.out.println(new TCP(tram2).toString());

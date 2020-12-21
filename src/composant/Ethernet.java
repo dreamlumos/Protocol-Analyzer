@@ -28,7 +28,7 @@ public class Ethernet {
 		if(trame.trameValide()) {
 		StringBuilder ch = new StringBuilder();
 		ch.append("\tDestination : ").append(macDest.toString()).append(" \n\tSource : ").append(macSource).append(" \n\tType : ").append(dictionnary.get(protocole.toString())).append(" (0x").append(protocole).append(")\n");
-		return "Ethernet II, Src: "+macSource.toString()+" Dst: "+macDest+"\n"+ch.toString();
+		return "Ethernet II, Src: "+macSource.toString()+", Dst: "+macDest+"\n"+ch.toString();
 		}
 		return "";
 	}

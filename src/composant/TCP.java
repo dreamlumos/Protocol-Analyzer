@@ -23,42 +23,46 @@ public class TCP {
 	
 	private int len;
 	private int headerLength;
+	
 	public TCP(Trame trame) {
 		this.trame = trame;
-		if (trame.trameValide() && (trame.getOctets().get(12) + trame.getOctets().get(13)).equals("0800") ) { //trame incomplete ou non-ipv4
-		dictionary.put("002", "(SYN)");
-		dictionary.put("010", "(ACK)");
-		dictionary.put("012", "(SYN, ACK)");
 		
-		String versionip = trame.getOctets().get(14);
-		int tailleip = Integer.parseInt("0" + versionip.charAt(0), 16)* Integer.parseInt("0" + versionip.charAt(1), 16);
-		int tailleTrame = 14 + Integer.parseInt(trame.getOctets().get(16)+trame.getOctets().get(17),16);
-		
-		if (Integer.parseInt(trame.getOctets().get(23),16) == 6 && tailleip+14 < tailleTrame ) {
+		if (trame.trameValide() && (trame.getOctets().get(12) + trame.getOctets().get(13)).equals("0800") ) { //trame complete et ipv4
+			dictionary.put("002", "(SYN)");
+			dictionary.put("010", "(ACK)");
+			dictionary.put("012", "(SYN, ACK)");
 			
-			int position = tailleip+14;//position tcp
+			String versionip = trame.getOctets().get(14);
+			int tailleip = Integer.parseInt("0" + versionip.charAt(0), 16)* Integer.parseInt("0" + versionip.charAt(1), 16);
+			int tailleTrame = 14 + Integer.parseInt(trame.getOctets().get(16)+trame.getOctets().get(17),16);
 			
-			sourcePort = Integer.parseInt(trame.getOctets().get(position)+trame.getOctets().get(position+1),16);
-			destPort = Integer.parseInt(trame.getOctets().get(position+2)+trame.getOctets().get(position+3),16);
-			sequenceNumber = bigHexa(trame.getOctets().get(position + 4) + trame.getOctets().get(position + 5)+ trame.getOctets().get(position + 6) + trame.getOctets().get(position + 7));
-			acknowledgmentNumber = bigHexa(trame.getOctets().get(position + 8) + trame.getOctets().get(position + 9)+ trame.getOctets().get(position + 10) + trame.getOctets().get(position + 11));
-			dataOffset = trame.getOctets().get(position+12);
-
-			flagsValues = ""+dataOffset.charAt(1)+trame.getOctets().get(position+13);
-			flags = "Flags: 0x"+flagsValues+" "+dictionary.get(flagsValues);
-			binaryFlags = trame.extBit(Integer.toBinaryString(Integer.parseInt(flagsValues,16)),12);
-			
-			window = Integer.parseInt(trame.getOctets().get(position+14)+trame.getOctets().get(position+15),16);
-			checksum = trame.getOctets().get(position+16)+trame.getOctets().get(position+17);
-			urgent = Integer.parseInt(trame.getOctets().get(position+18)+trame.getOctets().get(position+19),16);
-			headerLength = Integer.parseInt(""+dataOffset.charAt(0),16);
-			System.out.println((Integer.parseInt("0"+trame.getOctets().get(14).charAt(0),16)*Integer.parseInt("0"+trame.getOctets().get(14).charAt(1),16)));
-			System.out.println( headerLength);
-			len = trame.getOctets().size()-14-(Integer.parseInt("0"+trame.getOctets().get(14).charAt(0),16)*Integer.parseInt("0"+trame.getOctets().get(14).charAt(1),16))-headerLength*4;
-		}
+			if (Integer.parseInt(trame.getOctets().get(23),16) == 6 && tailleip+14 < tailleTrame ) {
+				
+				int position = tailleip+14;//position tcp
+				
+				sourcePort = Integer.parseInt(trame.getOctets().get(position)+trame.getOctets().get(position+1),16);
+				destPort = Integer.parseInt(trame.getOctets().get(position+2)+trame.getOctets().get(position+3),16);
+				sequenceNumber = bigHexa(trame.getOctets().get(position + 4) + trame.getOctets().get(position + 5)+ trame.getOctets().get(position + 6) + trame.getOctets().get(position + 7));
+				acknowledgmentNumber = bigHexa(trame.getOctets().get(position + 8) + trame.getOctets().get(position + 9)+ trame.getOctets().get(position + 10) + trame.getOctets().get(position + 11));
+				dataOffset = trame.getOctets().get(position+12);
+	
+				flagsValues = ""+dataOffset.charAt(1)+trame.getOctets().get(position+13);
+				flags = "Flags: 0x"+flagsValues+" "+dictionary.get(flagsValues);
+				binaryFlags = trame.extBit(Integer.toBinaryString(Integer.parseInt(flagsValues,16)),12);
+				
+				window = Integer.parseInt(trame.getOctets().get(position+14)+trame.getOctets().get(position+15),16);
+				checksum = trame.getOctets().get(position+16)+trame.getOctets().get(position+17);
+				urgent = Integer.parseInt(trame.getOctets().get(position+18)+trame.getOctets().get(position+19),16);
+				headerLength = Integer.parseInt(""+dataOffset.charAt(0),16);
+				System.out.println((Integer.parseInt("0"+trame.getOctets().get(14).charAt(0),16)*Integer.parseInt("0"+trame.getOctets().get(14).charAt(1),16)));
+				System.out.println( headerLength);
+				len = trame.getOctets().size()-14-(Integer.parseInt("0"+trame.getOctets().get(14).charAt(0),16)*Integer.parseInt("0"+trame.getOctets().get(14).charAt(1),16))-headerLength*4;
+			}
 		}
 	}
-	public int bigHexa(String s) {// transformer hexa en decimale
+	
+	/* Transforme un octet en valeur decimale. */
+	public int bigHexa(String s) {
 		int result = 0;
 		int cpt = 0;
 		for (int i = s.length() - 1; i >= 0; i--) {
@@ -120,12 +124,15 @@ public class TCP {
 		else sb.append(".");
 		return sb.append("]").toString();
 	}
+	
 	public String options() {
+		
 		String versionip = trame.getOctets().get(14);
 		int tailleip = Integer.parseInt("0" + versionip.charAt(0), 16)* Integer.parseInt("0" + versionip.charAt(1), 16);
 		int position = tailleip+14;
 		StringBuilder option = new StringBuilder();
 		option.append("");
+		
 		if (headerLength > 5) {
 			int tailleOp = (headerLength - 5) * 4;
 			while (tailleOp > 0) {
@@ -222,15 +229,21 @@ public class TCP {
 				position += lengthOp;
 
 			}
+			
 			tailleOp = (headerLength - 5) * 4;
 			option.append("Options: (" + tailleOp + ") bytes" + option.toString());
 		}
+		
 		return option.toString();
 	}
 	
 	@Override
 	public String toString() {
-		if (trame.trameValide() && (trame.getOctets().get(12) + trame.getOctets().get(13)).equals("0800")) {
+		
+		if (!trame.trameValide() || !(trame.getOctets().get(12) + trame.getOctets().get(13)).equals("0800")) {
+			return "TCP : Trame invalide";
+		}
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n\tSource Port: "+sourcePort);
 		sb.append("\n\tDestination Port: "+destPort);
@@ -246,6 +259,4 @@ public class TCP {
 	
 		return"\nTransmission Control Protocol, Src Port: "+sourcePort+", Dst Port: "+destPort+", Seq: "+sequenceNumber+", Len: "+len+sb.toString()+options();
 	}
-	return "";
-}
 }
