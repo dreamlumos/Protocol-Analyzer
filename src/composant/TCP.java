@@ -54,8 +54,6 @@ public class TCP {
 				checksum = trame.getOctets().get(position+16)+trame.getOctets().get(position+17);
 				urgent = Integer.parseInt(trame.getOctets().get(position+18)+trame.getOctets().get(position+19),16);
 				headerLength = Integer.parseInt(""+dataOffset.charAt(0),16);
-				System.out.println((Integer.parseInt("0"+trame.getOctets().get(14).charAt(0),16)*Integer.parseInt("0"+trame.getOctets().get(14).charAt(1),16)));
-				System.out.println( headerLength);
 				len = trame.getOctets().size()-14-(Integer.parseInt("0"+trame.getOctets().get(14).charAt(0),16)*Integer.parseInt("0"+trame.getOctets().get(14).charAt(1),16))-headerLength*4;
 			}
 		}
