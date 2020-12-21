@@ -9,7 +9,8 @@ public class Test {
 	public static void main (String[]args) {
 		
 		Trames trames = new Trames();
-		String file = "data/TestHTTP.txt";
+		String file = "data/TestFile.txt";
+		//String file = "data/TestHTTP.txt";
 		
 		try {
 			GenTrame.FileToTrames(trames, file);
