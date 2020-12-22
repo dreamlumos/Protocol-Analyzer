@@ -1,0 +1,96 @@
+Trace 1 : ---------------------------
+06 48 7d b1 70 86 e4 aa ea 9f cf d7 08 00 45 00 
+02 00 38 32 40 00 80 06 d9 18 c0 a8 2b bd 84 e3 
+76 64 fe 07 00 50 7c aa b7 96 aa 1e f0 7d 50 18 
+02 00 38 d3 00 00 47 45 54 20 2f 6c 6d 64 2f 6c 
+69 63 65 6e 63 65 2f 70 75 62 6c 69 63 2f 65 73 
+70 61 63 65 5f 65 74 75 64 69 61 6e 74 2f 6e 6f 
+75 76 65 6c 6c 65 73 2f 20 48 54 54 50 2f 31 2e 
+31 0d 0a 48 6f 73 74 3a 20 77 77 77 2d 6c 69 63 
+65 6e 63 65 2e 75 66 72 2d 69 6e 66 6f 2d 70 36 
+2e 6a 75 73 73 69 65 75 2e 66 72 0d 0a 55 73 65 
+72 2d 41 67 65 6e 74 3a 20 4d 6f 7a 69 6c 6c 61 
+2f 35 2e 30 20 28 57 69 6e 64 6f 77 73 20 4e 54 
+20 31 30 2e 30 3b 20 57 69 6e 36 34 3b 20 78 36 
+34 3b 20 72 76 3a 38 34 2e 30 29 20 47 65 63 6b 
+6f 2f 32 30 31 30 30 31 30 31 20 46 69 72 65 66 
+6f 78 2f 38 34 2e 30 0d 0a 41 63 63 65 70 74 3a 
+20 74 65 78 74 2f 68 74 6d 6c 2c 61 70 70 6c 69 
+63 61 74 69 6f 6e 2f 78 68 74 6d 6c 2b 78 6d 6c 
+2c 61 70 70 6c 69 63 61 74 69 6f 6e 2f 78 6d 6c 
+3b 71 3d 30 2e 39 2c 69 6d 61 67 65 2f 77 65 62 
+70 2c 2a 2f 2a 3b 71 3d 30 2e 38 0d 0a 41 63 63 
+65 70 74 2d 4c 61 6e 67 75 61 67 65 3a 20 65 6e 
+2d 47 42 2c 65 6e 3b 71 3d 30 2e 35 0d 0a 41 63 
+63 65 70 74 2d 45 6e 63 6f 64 69 6e 67 3a 20 67 
+7a 69 70 2c 20 64 65 66 6c 61 74 65 0d 0a 44 4e 
+54 3a 20 31 0d 0a 43 6f 6e 6e 65 63 74 69 6f 6e 
+3a 20 6b 65 65 70 2d 61 6c 69 76 65 0d 0a 43 6f 
+6f 6b 69 65 3a 20 50 48 50 53 45 53 53 49 44 3d 
+39 61 66 35 34 37 35 37 61 38 31 62 38 38 65 36 
+39 65 63 64 37 35 39 31 34 62 33 38 64 66 34 64 
+0d 0a 55 70 67 72 61 64 65 2d 49 6e 73 65 63 75 
+72 65 2d 52 65 71 75 65 73 74 73 3a 20 31 0d 0a 
+53 65 63 2d 47 50 43 3a 20 31 0d 0a 0d 0a 
+
+Ethernet II, Src: e4:aa:ea:9f:cf:d7, Dst: 06:48:7d:b1:70:86
+	Destination : 06:48:7d:b1:70:86 
+	Source : e4:aa:ea:9f:cf:d7 
+	Type : IPV4 (0x0800)
+
+Internet Protocol Version 4, Src: 192.168.43.189, Dst: 132.227.118.100
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field(TOS): 0x00
+	Total Length: 512
+	Identification: 0x3832 (14386)
+	Flags: 0x40
+		0... .... = Reserved bit: Not set
+		.1.. .... = Don't fragment: Set
+		..0. .... = More fragments: Not set
+	Fragment Offset: 0
+	Time to Live: 128
+	Protocol: TCP (6)
+	Header Checksum: 0xd918
+	Source Address: 192.168.43.189
+	Destination Address: 132.227.118.100
+
+Transmission Control Protocol, Src Port: 65031, Dst Port: 80, Seq: 2091562902, Len: 472
+	Source Port: 65031
+	Destination Port: 80
+	[TCP Segment Len: 472]
+	Sequence Number: 2091562902
+	Acknowledgment Number: 2854154365
+	0101 .... = Header Length: 20 Bytes (5)
+	Flags: 0x018 null
+		000. .... = Reserved Not set
+		...0 .... .... = Nonce: Not set
+		.... 0... .... = Congestion Window Reduced (CWR): Not set
+		.... .0.. .... = ECN-Echo: Not set
+		.... ..0. .... = Urgent: Not set
+		.... ...1 .... = Acknowledgment: Set
+		.... .... 1... = Push: Set
+		.... .... .0.. = Reset: Not set
+		.... .... ..0. = Syn: Not set
+		.... .... ...0 = Fin: Not set
+		[TCP Flags: .....AP...]
+	Window: 512
+	Checksum: 0x38d3
+	Urgent Pointer: 0
+
+
+Hypertext Transfer Protocol
+	GET /lmd/licence/public/espace_etudiant/nouvelles/ HTTP/1.1
+	Host: www-licence.ufr-info-p6.jussieu.fr
+	User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+	Accept-Language: en-GB,en;q=0.5
+	Accept-Encoding: gzip, deflate
+	DNT: 1
+	Connection: keep-alive
+	Cookie: PHPSESSID=9af54757a81b88e69ecd75914b38df4d
+	Upgrade-Insecure-Requests: 1
+	Sec-GPC: 1
+	
+	
+

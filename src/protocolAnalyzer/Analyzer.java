@@ -11,26 +11,31 @@ public class Analyzer {
 	public static void main (String[] args) {
 		
 		Traces traces = new Traces();
-		String file = "data/input/TestFile.txt";
-		//String file = "data/input/TestHTTP.txt";
+		
+		/* Pour tester, décommentez une des deux lignes suivantes */
+		//String input = "data/input/TestFile.txt";
+		String input = "data/input/TestHTTP.txt";
 		
 		try {
 			
-			TraceFile.FileToTraces(traces, file);
-			
-/*			
 			Scanner sc = new Scanner(System.in); 
+			TraceFile.FileToTraces(traces, input);
+			
 			String fileName = "data/output/";
+			System.out.println("Veuillez entrer le nom du fichier de sortie : \n");
 			fileName += sc.nextLine();
 			sc.close();
-*/			
+		
 			for (Trace trace : traces.getTraces()) {
 				System.out.println(trace.toString());
-				//trame.stringToFile(fileName);
+				trace.stringToFile(fileName);
 			}
+			
+			System.out.println("Le résultat de l'analyse se situe dans "+fileName);
 		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 }

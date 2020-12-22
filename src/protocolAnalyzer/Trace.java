@@ -114,4 +114,17 @@ public class Trace {
 		    writer.close();
 		}
 	}
+	
+	public static void  stringToFileGraph(BufferedWriter fileName ,String str) throws IOException {
+		
+	    BufferedWriter writer=null;
+		try {
+			writer = new BufferedWriter(fileName);
+			writer.append(str);
+		} catch (IOException e) {
+			System.out.println(e);
+		} finally {
+		    writer.close();
+		}
+	}
 }
