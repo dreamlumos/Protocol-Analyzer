@@ -1,4 +1,4 @@
-package composant;
+package protocolAnalyzer;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -6,20 +6,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Trame {
+public class Trace {
 	
-	private static int nbTrames = 0;
-	private int numeroTrame;
-	private boolean trameValide;
+	private static int nbTraces = 0;
+	private int numeroTrace;
+	private boolean traceValide;
 	private String ligneIncomplete = "Erreur : Ligne incomplete en position ";
 	private ArrayList<String> octets;
 	private int[] offsets;
 	private DataUnit frame;
 	
-	public Trame() {
-		nbTrames++;
-		numeroTrame = nbTrames;
-		trameValide = true;
+	public Trace() {
+		nbTraces++;
+		numeroTrace = nbTraces;
+		traceValide = true;
 		octets = new ArrayList<>();
 		offsets = new int[1526]; // En pratique, il est rare qu'un datagramme IP fasse plus de 1500 octets. +26 pour Ethernet
 		for(int i = 0; i < 1526; i++) {
@@ -29,17 +29,17 @@ public class Trame {
 	}
 	
 	public void createFrame() {
-		if (trameValide)
+		if (traceValide)
 			frame = new Ethernet(octets);
 	}
 	
-	public boolean trameValide() {
-		return trameValide;
+	public boolean traceValide() {
+		return traceValide;
 	}
 	
-	public void trameInvalide(int position) {
-		trameValide = false;
-		ligneIncomplete += "" + position + " de la trame " + numeroTrame + "\n\n";
+	public void traceInvalide(int position) {
+		traceValide = false;
+		ligneIncomplete += "" + position + " de la trace " + numeroTrace + "\n\n";
 	}
 	
 	public boolean addOctet(String s) {
@@ -62,9 +62,9 @@ public class Trame {
 		
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("Trame "+numeroTrame+" : ---------------------------\n");
+		sb.append("Trace "+numeroTrace+" : ---------------------------\n");
 		
-		if(!trameValide()) return sb.append(ligneIncomplete).toString();
+		if(!traceValide()) return sb.append(ligneIncomplete).toString();
 
 		int positionOctets = 0;
 		int positionOffsets = 1;

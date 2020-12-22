@@ -1,8 +1,8 @@
-package composant;
+package protocolAnalyzer;
 
 import java.util.List;
 
-import generateurDeTrame.HexTools;
+import tools.HexTools;
 
 public class IPV4 implements DataUnit {
 	

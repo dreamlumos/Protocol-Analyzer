@@ -1,4 +1,4 @@
-package composant;
+package protocolAnalyzer;
 
 public interface DataUnit {
 

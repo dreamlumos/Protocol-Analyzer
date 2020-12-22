@@ -1,9 +1,9 @@
-package composant;
+package protocolAnalyzer;
 
 import java.util.HashMap;
 import java.util.List;
 
-import generateurDeTrame.HexTools;
+import tools.HexTools;
 
 public class TCP implements DataUnit {
 	
@@ -126,9 +126,16 @@ public class TCP implements DataUnit {
 			while (tailleOp > 0) {
 				int kind = Integer.parseInt(segment.get(position + 20));
 				int lengthOp = 1;
-				if (kind != 0 && kind != 1)
+				String optData = "";
+				
+				if (kind != 0 && kind != 1) {
 					lengthOp = Integer.parseInt(segment.get(position + 21), 16);
-
+					
+					for (int i = 0; i < lengthOp-2; i++ ) {
+						optData += segment.get(position + 22 + i);
+					}
+				}
+				
 				switch (kind) {
 					case 0:
 						option.append("\n\t\tTCP Option - End of Option List");
@@ -146,12 +153,14 @@ public class TCP implements DataUnit {
 						option.append("\n\t\tTCP Option - Maximum Segment Size ");
 						option.append("\n\t\t\tKind: Maximum Segment Size (" + kind + ")");
 						option.append("\n\t\t\tLength: " + lengthOp);
+						option.append("\n\t\t\tMSS Value: " + HexTools.longHexToDec(optData));
 						break;
 						
 					case 3:
 						option.append("\n\t\tTCP Option - Window Scale ");
 						option.append("\n\t\t\tKind: Window Scale (" + kind + ")");
 						option.append("\n\t\t\tLength: " + lengthOp);
+						option.append("\n\t\t\tShift count: " + HexTools.longHexToDec(optData));
 						break;
 						
 					case 4:
@@ -179,8 +188,10 @@ public class TCP implements DataUnit {
 					
 					case 8:
 						option.append("\n\t\tTCP Option - Time Stamp Option ");
-						option.append("\n\t\t\tKind: TSOPT - Time Stamp Option (" + kind + ")");
+						option.append("\n\t\t\tKind: Time Stamp Option (" + kind + ")");
 						option.append("\n\t\t\tLength: " + lengthOp);
+						option.append("\n\t\t\tTimestamp value: " + HexTools.longHexToDec(optData.substring(0, 8)));
+						option.append("\n\t\t\tTimestamp echo reply: " + HexTools.longHexToDec(optData.substring(8, 16)));
 						break;
 						
 					case 9:

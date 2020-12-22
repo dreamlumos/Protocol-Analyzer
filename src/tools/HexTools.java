@@ -1,4 +1,4 @@
-package generateurDeTrame;
+package tools;
 
 public class HexTools {
 

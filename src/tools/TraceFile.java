@@ -1,19 +1,19 @@
-package generateurDeTrame;
+package tools;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import composant.Trame;
+import protocolAnalyzer.Trace;
 
-public class GenTrame {
+public class TraceFile {
 	
-	public static void FileToTrames(Trames trames, String file) throws IOException {
+	public static void FileToTraces(Traces traces, String file) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line = br.readLine();
 		String line2;
-		Trame tram = null;
+		Trace tram = null;
 		String[] lignecourante;
 		String[] lignesuivante = null;
 		int positionOffset = 0;
@@ -27,17 +27,17 @@ public class GenTrame {
 				line = br.readLine();
 			} else {
 				
-				//Premiere ligne de la trame (le offset est egal a zero)
+				//Premiere ligne de la trace (le offset est egal a zero)
 				if((Integer.parseInt(lignecourante[0], 16)) == 0) {
 					if(tram != null) {
-						if(!trames.getTrames().contains(tram)) {
-							trames.addTrame(tram);
+						if(!traces.getTraces().contains(tram)) {
+							traces.addTrace(tram);
 						}
 					}
-					tram = new Trame();
+					tram = new Trace();
 				}
 				
-				if(!tram.trameValide()) {
+				if(!tram.traceValide()) {
 					line = br.readLine();
 				} else {
 					tram.addOffset(Integer.parseInt(lignecourante[0], 16), positionOffset);
@@ -54,7 +54,7 @@ public class GenTrame {
 						
 						lignesuivante = line2.split("[ ]+");//pour compiler a la sortie du do while
 						
-						if((Integer.parseInt(lignesuivante[0], 16))==0 && positionOffset-1!=0) {//cas de la derniere ligne de chaque trame
+						if((Integer.parseInt(lignesuivante[0], 16))==0 && positionOffset-1!=0) {//cas de la derniere ligne de chaque trace
 							/* taille tram - dernieroffset */
 							nbrOctets = 14 + Integer.parseInt(tram.getOctets().get(16),16) + Integer.parseInt(tram.getOctets().get(17),16)-Integer.parseInt(lignecourante[0], 16);
 							test(nbrOctets, tram, lignecourante, positionOffset);
@@ -68,12 +68,12 @@ public class GenTrame {
 								}
 								line=line2;
 							} else {
-								if(Integer.parseInt(lignesuivante[0], 16)==0)tram.trameInvalide(positionOffset);
+								if(Integer.parseInt(lignesuivante[0], 16)==0)tram.traceInvalide(positionOffset);
 								positionOffset--;
 							}
 						}
 
-					} else { //cas derniere trame
+					} else { //cas derniere trace
 						/* taille tram - dernieroffset */
 						if(tram.getOctets().size()>17) {
 							nbrOctets = 14 + Integer.parseInt(tram.getOctets().get(16)+tram.getOctets().get(17),16)-Integer.parseInt(lignecourante[0], 16);
@@ -82,10 +82,10 @@ public class GenTrame {
 							}
 
 						} else {
-							tram.trameInvalide(positionOffset);
+							tram.traceInvalide(positionOffset);
 							positionOffset=0;
 						}
-						trames.addTrame(tram);
+						traces.addTrace(tram);
 						tram = null;
 						line = br.readLine();
 					}
@@ -94,14 +94,14 @@ public class GenTrame {
 		} //endwhile
 
 		
-		for(Trame tram2 : trames.getTrames()) {
+		for(Trace tram2 : traces.getTraces()) {
 			tram2.createFrame();
 		}
 		
 		br.close();
 	}
 	
-	private static boolean test(int nbOctets, Trame tram, String[] lignecourante, int positionOffset) {
+	private static boolean test(int nbOctets, Trace tram, String[] lignecourante, int positionOffset) {
 		try{
 			for(int i=1; i <= nbOctets; i++ ) {
 				if(isOctet(lignecourante[i])) {
@@ -109,7 +109,7 @@ public class GenTrame {
 				}	
 			}
 		} catch(IndexOutOfBoundsException e) {
-			tram.trameInvalide(positionOffset);
+			tram.traceInvalide(positionOffset);
 			return false;
 		}
 		return true;
@@ -127,7 +127,7 @@ public class GenTrame {
 		return false;
 	}
 	
-	/* Verifie si offset est correct, convention de string vide pour la premiere ligne de la trame */
+	/* Verifie si offset est correct, convention de string vide pour la premiere ligne de la trace */
 	private static boolean isOffset(String offset, String offsetavant) {
 		if (offset=="") return false;
 		try {

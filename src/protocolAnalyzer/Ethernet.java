@@ -1,4 +1,4 @@
-package composant;
+package protocolAnalyzer;
 
 import java.util.HashMap;
 import java.util.List;
