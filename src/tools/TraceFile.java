@@ -57,13 +57,13 @@ public class TraceFile {
 						if((Integer.parseInt(lignesuivante[0], 16))==0 && positionOffset-1!=0) {//cas de la derniere ligne de chaque trace
 							/* taille tram - dernieroffset */
 							nbrOctets = 14 + Integer.parseInt(tram.getOctets().get(16),16) + Integer.parseInt(tram.getOctets().get(17),16)-Integer.parseInt(lignecourante[0], 16);
-							test(nbrOctets, tram, lignecourante, positionOffset);
+							ajouterOctet(nbrOctets, tram, lignecourante, positionOffset);
 							positionOffset=0;
 							line=line2;
 						} else {
 							if(isOffset(lignesuivante[0], lignecourante[0])) {//verifier si offset plus grand ou bien ignorer
 								nbrOctets= Integer.parseInt(lignesuivante[0], 16) - Integer.parseInt(lignecourante[0], 16);
-								if (!test(nbrOctets, tram, lignecourante, positionOffset)) {
+								if (!ajouterOctet(nbrOctets, tram, lignecourante, positionOffset)) {
 									positionOffset = 0;
 								}
 								line=line2;
@@ -77,7 +77,7 @@ public class TraceFile {
 						/* taille tram - dernieroffset */
 						if(tram.getOctets().size()>17) {
 							nbrOctets = 14 + Integer.parseInt(tram.getOctets().get(16)+tram.getOctets().get(17),16)-Integer.parseInt(lignecourante[0], 16);
-							if (!test(nbrOctets, tram, lignecourante, positionOffset)) {
+							if (!ajouterOctet(nbrOctets, tram, lignecourante, positionOffset)) {
 								positionOffset = 0;
 							}
 
@@ -101,7 +101,7 @@ public class TraceFile {
 		br.close();
 	}
 	
-	private static boolean test(int nbOctets, Trace tram, String[] lignecourante, int positionOffset) {
+	private static boolean ajouterOctet(int nbOctets, Trace tram, String[] lignecourante, int positionOffset) {
 		try{
 			for(int i=1; i <= nbOctets; i++ ) {
 				if(isOctet(lignecourante[i])) {

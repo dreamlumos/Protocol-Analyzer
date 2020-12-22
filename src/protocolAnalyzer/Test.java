@@ -18,14 +18,15 @@ public class Test {
 			
 			TraceFile.FileToTraces(traces, file);
 			
-//			Scanner sc = new Scanner(System.in); 
-//			String fileName = "data/output/";
-//			fileName += sc.nextLine();
-//			sc.close();
-			
+/*			
+			Scanner sc = new Scanner(System.in); 
+			String fileName = "data/output/";
+			fileName += sc.nextLine();
+			sc.close();
+*/			
 			for (Trace trace : traces.getTraces()) {
 				System.out.println(trace.toString());
-//				trame.stringToFile(fileName);
+				//trame.stringToFile(fileName);
 			}
 		
 		} catch (IOException e) {
