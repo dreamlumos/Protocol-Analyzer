@@ -2,10 +2,11 @@ package composant;
 
 import java.util.List;
 
+import generateurDeTrame.HexTools;
+
 public class IPV4 implements DataUnit {
 	
 	private List<String> packet;
-	private StringBuilder sb = new StringBuilder();
 	
 	private String version;
 	private int headerLength;
@@ -20,7 +21,7 @@ public class IPV4 implements DataUnit {
 	
 	private DataUnit segment;
 	
-	/* Le constructeur prend en argument une liste d'octets correspondant à un pacquet IP. */
+	/* Le constructeur prend en argument une liste d'octets correspondant à un paquet IP. */
 	public IPV4(List<String> packet) {
 		
 		 this.packet = packet;
@@ -59,29 +60,31 @@ public class IPV4 implements DataUnit {
 	@Override
 	public String toString() {
 			
+		StringBuilder sb = new StringBuilder();
+
 		sb.append("\t0100 .... = Version: ").append(version.charAt(0)+"\n");//version
-		sb.append("\t.... ").append(Trame.extBit(Integer.toBinaryString(Integer.parseInt("0"+version.charAt(1),16)),4)).append(" = Header Length: ");
+		sb.append("\t.... ").append(HexTools.extBit(Integer.toBinaryString(Integer.parseInt("0"+version.charAt(1),16)),4)).append(" = Header Length: ");
 		sb.append(headerLength+" bytes ("+Integer.parseInt("0"+version.charAt(1),16)+")\n"); // nombres de lignes 
 		sb.append("\tDifferentiated Services Field(TOS): 0x"+typeOfService+"\n");
 		sb.append("\tTotal Length: " + totalLength);
 		sb.append("\n\tIdentification: 0x"+identification+" ("+Integer.parseInt(identification,16)+")\n");
 		sb.append("\tFlags: 0x"+flags+"\n");
 		
-		if((Trame.extBit(Integer.toBinaryString(flags2),4).charAt(0)+"").equals("1")) {
+		if((HexTools.extBit(Integer.toBinaryString(flags2),4).charAt(0)+"").equals("1")) {
 			sb.append("\t\t1... .... = Reserved bit: Set");
 			
 		} else {
 			sb.append("\t\t0... .... = Reserved bit: Not set");
 		}
 		
-		if((Trame.extBit(Integer.toBinaryString(flags2),4).charAt(1)+"").equals("1")) {// a resoudre
+		if((HexTools.extBit(Integer.toBinaryString(flags2),4).charAt(1)+"").equals("1")) {// a resoudre
 			sb.append("\n\t\t.1.. .... = Don't fragment: Set");
 		}
 		else {
 			sb.append("\n\t\t.0.. .... = Don't fragment: Not set");
 		}
 		
-		if((Trame.extBit(Integer.toBinaryString(flags2),4).charAt(2)+"").equals("1")) {
+		if((HexTools.extBit(Integer.toBinaryString(flags2),4).charAt(2)+"").equals("1")) {
 			sb.append("\n\t\t..1. .... = More fragments: Set");
 		} else {
 			sb.append("\n\t\t..0. .... = More fragments: Not set");

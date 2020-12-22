@@ -43,7 +43,7 @@ public class Trame {
 	}
 	
 	public boolean addOffset(int offset, int position) {
-		if(position<1000&&offsets[position]==0) {
+		if(position<1000 && offsets[position]==0) {
 			offsets[position]=offset;
 			return true;
 		}
@@ -60,38 +60,29 @@ public class Trame {
 			System.out.println(offsets[i]);
 	}
 	
-	/* Extension non signe sur taille bits */
-	public static String extBit(String s, int taille) {
-		String sb = s;
-		
-		for (int i = 0; i < taille-s.length(); i++) {
-			sb = "0"+sb;
-		}
-		return sb;
-	}
-	
 	public String toString() {
 		
 		System.out.println("\nTrame "+numeroTrame+" : ---------------------------");
 		
 		if(!trameValide()) return ligneIncompletes;
 
-		int positionoctets = 0;
-		int positionoffsets = 1;
+		int positionOctets = 0;
+		int positionOffsets = 1;
 		int i = 0;
-		int j = offsets[positionoffsets];
+		int j = offsets[positionOffsets];
+		
 		StringBuilder sb = new StringBuilder();
 		boolean notlast = true;
 		
 		while(i < j) {
-			sb.append(octets.get(positionoctets)+" ");
-			positionoctets++;
+			sb.append(octets.get(positionOctets)+" ");
+			positionOctets++;
 			
 			if(i+1 == j && notlast){
 				sb.append("\n");
-				positionoffsets++;
-				if(positionoffsets < offsets.length)
-					j = offsets[positionoffsets];
+				positionOffsets++;
+				if(positionOffsets < offsets.length)
+					j = offsets[positionOffsets];
 					if(j == 0) {
 						j = octets.size();
 						notlast = false;

@@ -3,6 +3,8 @@ package composant;
 import java.util.HashMap;
 import java.util.List;
 
+import generateurDeTrame.HexTools;
+
 public class TCP implements DataUnit {
 	
 	private List<String> segment;
@@ -10,8 +12,8 @@ public class TCP implements DataUnit {
 	
 	private int sourcePort;
 	private int destPort;
-	private int sequenceNumber;
-	private int acknowledgmentNumber;
+	private long sequenceNumber;
+	private long acknowledgmentNumber;
 	private String dataOffset;
 	
 	private String flagsValues;
@@ -37,13 +39,13 @@ public class TCP implements DataUnit {
 		
 		sourcePort = Integer.parseInt(segment.get(0)+segment.get(1),16);
 		destPort = Integer.parseInt(segment.get(2)+segment.get(3),16);
-		sequenceNumber = hexToDec(segment.get(4) + segment.get(5)+ segment.get(6) + segment.get(7));
-		acknowledgmentNumber = hexToDec(segment.get(8) + segment.get(9)+ segment.get(10) + segment.get(11));
+		sequenceNumber = HexTools.longHexToDec(segment.get(4) + segment.get(5)+ segment.get(6) + segment.get(7));
+		acknowledgmentNumber = HexTools.longHexToDec(segment.get(8) + segment.get(9)+ segment.get(10) + segment.get(11));
 		dataOffset = segment.get(12);
 
 		flagsValues = ""+dataOffset.charAt(1)+segment.get(13);
 		flags = "Flags: 0x"+flagsValues+" "+dictionary.get(flagsValues);
-		binaryFlags = Trame.extBit(Integer.toBinaryString(Integer.parseInt(flagsValues,16)),12);
+		binaryFlags = HexTools.extBit(Integer.toBinaryString(Integer.parseInt(flagsValues,16)),12);
 		
 		window = Integer.parseInt(segment.get(14)+segment.get(15),16);
 		checksum = segment.get(16)+segment.get(17);
@@ -56,17 +58,6 @@ public class TCP implements DataUnit {
 		} else {
 			System.out.println("Application layer protocol unknown.");
 		}
-	}
-	
-	/* Transforme un octet en valeur decimale. */
-	public int hexToDec(String s) {
-		int result = 0;
-		int cpt = 0;
-		for (int i = s.length() - 1; i >= 0; i--) {
-			result += (Integer.parseInt("" + s.charAt(cpt), 16) * Math.pow(16, i));
-			cpt++;
-		}
-		return result;
 	}
 	
 	public String flags(String s) {
@@ -232,7 +223,7 @@ public class TCP implements DataUnit {
 		sb.append("\n\t[TCP Segment Len: "+len +"]");
 		sb.append("\n\tSequence Number: "+sequenceNumber);
 		sb.append("\n\tAcknowledgment Number: "+acknowledgmentNumber);
-		sb.append("\n\t"+Trame.extBit(Integer.toBinaryString(headerLength),4)+" .... = Header Length: "+headerLength*4+" Bytes ("+headerLength+")");
+		sb.append("\n\t"+HexTools.extBit(Integer.toBinaryString(headerLength),4)+" .... = Header Length: "+headerLength*4+" Bytes ("+headerLength+")");
 		sb.append("\n\t"+flags);
 		sb.append(flags(binaryFlags));
 		sb.append("\n\tWindow: "+window);
