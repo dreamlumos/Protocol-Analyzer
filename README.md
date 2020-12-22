@@ -4,15 +4,15 @@ Projet de programmation d'un analyseur de protocoles réseau "offline" | UE : LU
 Structure du code :
 
 * Package : protocolAnalyzer​
-  * [Classe] Analyzer (main)​
-  * [Classe] Trace​
+  * [Class] Analyzer (main)​
+  * [Class] Trace​
   * [Interface] DataUnit​
-  * [Classe] Ethernet *implements DataUnit*​
-  * [Classe] IPV4 *implements DataUnit*​
-  * [Classe] TCP *implements DataUnit*​
-  * [Classe] HTTP *implements DataUnit*
+  * [Class] Ethernet *implements DataUnit*​
+  * [Class] IPV4 *implements DataUnit*​
+  * [Class] TCP *implements DataUnit*​
+  * [Class] HTTP *implements DataUnit*
 ​
 * Package : tools​
-  * [Classe] Traces​
-  * [Classe] TraceFile​
-  * [Classe] HexTools
+  * [Class] Traces​
+  * [Class] TraceFile​
+  * [Class] HexTools
