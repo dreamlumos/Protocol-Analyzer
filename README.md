@@ -1,7 +1,14 @@
-# LU3IN033-ProtocolAnalyzer
+# Protocol Analyzer
 Projet de programmation d'un analyseur de protocoles réseau "offline" | UE : LU3IN033 Sorbonne Université
 
-Structure du code :
+# Protocoles implémentés #
+
+* Ethernet
+* IPv4
+* TCP
+* HTTP
+
+# Structure du code #
 
 * Package : protocolAnalyzer​
   * [Class] Analyzer (main)​
