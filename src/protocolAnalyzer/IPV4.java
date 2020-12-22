@@ -62,7 +62,7 @@ public class IPV4 implements DataUnit {
 			
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("\t0100 .... = Version: ").append(version.charAt(0)+"\n");//version
+		sb.append("\t0100 .... = Version: ").append(version.charAt(0)+"\n"); //version
 		sb.append("\t.... ").append(HexTools.extBit(Integer.toBinaryString(Integer.parseInt("0"+version.charAt(1),16)),4)).append(" = Header Length: ");
 		sb.append(headerLength+" bytes ("+Integer.parseInt("0"+version.charAt(1),16)+")\n"); // nombres de lignes 
 		sb.append("\tDifferentiated Services Field(TOS): 0x"+typeOfService+"\n");
@@ -77,7 +77,7 @@ public class IPV4 implements DataUnit {
 			sb.append("\t\t0... .... = Reserved bit: Not set");
 		}
 		
-		if((HexTools.extBit(Integer.toBinaryString(flags2),4).charAt(1)+"").equals("1")) {// a resoudre
+		if((HexTools.extBit(Integer.toBinaryString(flags2),4).charAt(1)+"").equals("1")) {
 			sb.append("\n\t\t.1.. .... = Don't fragment: Set");
 		}
 		else {

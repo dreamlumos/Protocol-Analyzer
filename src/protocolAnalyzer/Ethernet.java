@@ -7,20 +7,22 @@ public class Ethernet implements DataUnit {
 	
 	private List<String> frame;
 	
-	private HashMap<String, String> dictionary = new HashMap<>();
+	private HashMap<String, String> protocolDict = new HashMap<>();
 	
 	private StringBuilder macSource = new StringBuilder();
 	private StringBuilder macDest = new StringBuilder();
 	private String protocol;
+	
 	private DataUnit packet;
 	
 	public Ethernet(List<String> octets) {
 
 		frame = octets;
 		
-		dictionary.put("0800", "IPV4");
-		dictionary.put("0806", "ARP");
-		dictionary.put("0805", "X.25 niveau 3");
+		protocolDict.put("0800", "IPV4");
+		protocolDict.put("0806", "ARP");
+		protocolDict.put("0805", "X.25 niveau 3");
+		
 		protocol = frame.get(12) + frame.get(13);
 		
 		for(int i = 0; i<6;i++) {
@@ -31,7 +33,7 @@ public class Ethernet implements DataUnit {
 		macDest.deleteCharAt(macDest.lastIndexOf(":"));
 		macSource.deleteCharAt(macSource.lastIndexOf(":"));
 		
-		if (protocol.equals("0800")) {
+		if (protocol.equals("0800") && Integer.parseInt(""+frame.get(14).charAt(0),16) == 4) {
 			packet = new IPV4(frame.subList(14, frame.size()));
 		} else {
 			System.out.println("Protocol "+protocol+" is not supported.");
@@ -39,15 +41,11 @@ public class Ethernet implements DataUnit {
 
 	}
 	
-	public String getProtocol() {
-		return protocol;
-	}
-	
 	@Override
 	public String toString() {
 		
 		StringBuilder ch = new StringBuilder();
-		ch.append("\tDestination : ").append(macDest.toString()).append(" \n\tSource : ").append(macSource).append(" \n\tType : ").append(dictionary.get(protocol.toString())).append(" (0x").append(protocol).append(")\n\n");
+		ch.append("\tDestination : ").append(macDest.toString()).append(" \n\tSource : ").append(macSource).append(" \n\tType : ").append(protocolDict.get(protocol.toString())).append(" (0x").append(protocol).append(")\n\n");
 		
 		if (packet != null) {
 			ch.append(packet.toString());

@@ -6,7 +6,7 @@ import java.util.Scanner;
 import tools.TraceFile;
 import tools.Traces;
 
-public class Test {
+public class Analyzer {
 
 	public static void main (String[] args) {
 		
