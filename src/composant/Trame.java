@@ -1,5 +1,9 @@
 package composant;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Trame {
@@ -7,7 +11,7 @@ public class Trame {
 	private static int nbTrames = 0;
 	private int numeroTrame;
 	private boolean trameValide;
-	private String ligneIncompletes = "Erreur : Ligne incomplete en position ";
+	private String ligneIncomplete = "Erreur : Ligne incomplete en position ";
 	private ArrayList<String> octets;
 	private int[] offsets;
 	private DataUnit frame;
@@ -35,10 +39,10 @@ public class Trame {
 	
 	public void trameInvalide(int position) {
 		trameValide = false;
-		ligneIncompletes += "" + position + " de la trame " + numeroTrame;
+		ligneIncomplete += "" + position + " de la trame " + numeroTrame + "\n\n";
 	}
 	
-	public boolean addOctets(String s) {
+	public boolean addOctet(String s) {
 		return octets.add(s);
 	}
 	
@@ -54,38 +58,33 @@ public class Trame {
 		return octets;
 	}
 	
-	//jen ai besoin pr tester
-	public void afficheOffsets() {
-		for(int i = 0; i < 5; i++)
-			System.out.println(offsets[i]);
-	}
-	
 	public String toString() {
 		
-		System.out.println("\nTrame "+numeroTrame+" : ---------------------------");
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("Trame "+numeroTrame+" : ---------------------------\n");
 		
-		if(!trameValide()) return ligneIncompletes;
+		if(!trameValide()) return sb.append(ligneIncomplete).toString();
 
 		int positionOctets = 0;
 		int positionOffsets = 1;
 		int i = 0;
 		int j = offsets[positionOffsets];
 		
-		StringBuilder sb = new StringBuilder();
-		boolean notlast = true;
+		boolean notLast = true;
 		
 		while(i < j) {
 			sb.append(octets.get(positionOctets)+" ");
 			positionOctets++;
 			
-			if(i+1 == j && notlast){
+			if(i+1 == j && notLast){
 				sb.append("\n");
 				positionOffsets++;
 				if(positionOffsets < offsets.length)
 					j = offsets[positionOffsets];
 					if(j == 0) {
 						j = octets.size();
-						notlast = false;
+						notLast = false;
 					}
 			}
 			i++;
@@ -93,7 +92,26 @@ public class Trame {
 		
 		sb.append("\n\n");
 		sb.append(frame.toString());
+		sb.append("\n\n");
 				
 		return sb.toString();
+	}
+	
+	public void stringToFile(String fileName) throws IOException {
+		
+		File output = new File(fileName);
+		output.createNewFile();
+		
+		BufferedWriter writer = null;
+		String str = toString();
+
+		try {
+			writer = new BufferedWriter(new FileWriter(output, true));
+			writer.append(str);
+		} catch (IOException e) {
+			System.out.println(e);
+		} finally {
+		    writer.close();
+		}
 	}
 }

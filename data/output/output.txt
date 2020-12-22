@@ -1,0 +1,243 @@
+Trame 1 : ---------------------------
+Erreur : Ligne incomplete en position 2 de la trame 1
+
+Trame 2 : ---------------------------
+08 00 20 0a ac 96 08 00 20 0a 70 66 08 00 4f 00 
+00 3c cb c9 00 00 ff 06 b9 7f 84 e3 3d 05 c0 21 
+9f 06 07 27 04 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+
+Ethernet II, Src: 08:00:20:0a:70:66, Dst: 08:00:20:0a:ac:96
+	Destination : 08:00:20:0a:ac:96 
+	Source : 08:00:20:0a:70:66 
+	Type : IPV4 (0x0800)
+
+Internet Protocol Version 4, Src: 132.227.61.5, Dst: 192.33.159.6
+	0100 .... = Version: 4
+	.... 1111 = Header Length: 60 bytes (15)
+	Differentiated Services Field(TOS): 0x00
+	Total Length: 60
+	Identification: 0xcbc9 (52169)
+	Flags: 0x00
+		0... .... = Reserved bit: Not set
+		.0.. .... = Don't fragment: Not set
+		..0. .... = More fragments: Not set
+	Fragment Offset: 0
+	Time to Live: 255
+	Protocol: TCP (6)
+	Header Checksum: 0xb97f
+	Source Address: 132.227.61.5
+	Destination Address: 192.33.159.6
+
+Trame 3 : ---------------------------
+00 50 7f 05 7d 40 00 10 a4 86 2d 0b 08 00 45 00 
+00 3c 17 96 40 00 40 06 6d f3 0a 21 b6 b2 c0 37 
+34 28 84 b3 00 50 b6 94 b0 b7 00 00 00 00 a0 02 
+16 d0 e8 23 00 00 02 04 05 b4 04 02 08 0a 00 6f 
+a7 21 00 00 00 00 01 03 03 00 
+
+Ethernet II, Src: 00:10:a4:86:2d:0b, Dst: 00:50:7f:05:7d:40
+	Destination : 00:50:7f:05:7d:40 
+	Source : 00:10:a4:86:2d:0b 
+	Type : IPV4 (0x0800)
+
+Internet Protocol Version 4, Src: 10.33.182.178, Dst: 192.55.52.40
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field(TOS): 0x00
+	Total Length: 60
+	Identification: 0x1796 (6038)
+	Flags: 0x40
+		0... .... = Reserved bit: Not set
+		.1.. .... = Don't fragment: Set
+		..0. .... = More fragments: Not set
+	Fragment Offset: 0
+	Time to Live: 64
+	Protocol: TCP (6)
+	Header Checksum: 0x6df3
+	Source Address: 10.33.182.178
+	Destination Address: 192.55.52.40
+
+Transmission Control Protocol, Src Port: 33971, Dst Port: 80, Seq: 3063197879, Len: 0
+	Source Port: 33971
+	Destination Port: 80
+	[TCP Segment Len: 0]
+	Sequence Number: 3063197879
+	Acknowledgment Number: 0
+	1010 .... = Header Length: 40 Bytes (10)
+	Flags: 0x002 (SYN)
+		000. .... = Reserved Not set
+		...0 .... .... = Nonce: Not set
+		.... 0... .... = Congestion Window Reduced (CWR): Not set
+		.... .0.. .... = ECN-Echo: Not set
+		.... ..0. .... = Urgent: Not set
+		.... ...0 .... = Acknowledgment: Not set
+		.... .... 0... = Push: Not set
+		.... .... .0.. = Reset: Not set
+		.... .... ..1. = Syn: Set
+		.... .... ...0 = Fin: Not set
+		[TCP Flags: ........S.]
+	Window: 5840
+	Checksum: 0xe823
+	Urgent Pointer: 0
+	Options: (20 bytes)
+		TCP Option - Maximum Segment Size 
+			Kind: Maximum Segment Size (2)
+			Length: 4
+		TCP Option - SACK Permitted 
+			Kind: SACK Permitted (4)
+			Length: 2
+		TCP Option - Time Stamp Option 
+			Kind: TSOPT - Time Stamp Option (8)
+			Length: 10
+		TCP Option - No-Operation 
+			Kind: No-Operation (1)
+		TCP Option - Window Scale 
+			Kind: Window Scale (3)
+			Length: 3
+
+Hypertext Transfer Protocol
+	
+
+Trame 4 : ---------------------------
+00 50 7f 05 7d 40 00 10 a4 86 2d 0b 08 00 45 00 
+00 3c 17 96 40 00 40 06 6d f3 0a 21 b6 b2 c0 37 
+34 28 84 b3 00 50 b6 94 b0 b7 00 00 00 00 a0 02 
+16 d0 e8 23 00 00 02 04 05 b4 04 02 08 0a 00 6f 
+a7 21 00 00 00 00 01 03 03 00 
+
+Ethernet II, Src: 00:10:a4:86:2d:0b, Dst: 00:50:7f:05:7d:40
+	Destination : 00:50:7f:05:7d:40 
+	Source : 00:10:a4:86:2d:0b 
+	Type : IPV4 (0x0800)
+
+Internet Protocol Version 4, Src: 10.33.182.178, Dst: 192.55.52.40
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field(TOS): 0x00
+	Total Length: 60
+	Identification: 0x1796 (6038)
+	Flags: 0x40
+		0... .... = Reserved bit: Not set
+		.1.. .... = Don't fragment: Set
+		..0. .... = More fragments: Not set
+	Fragment Offset: 0
+	Time to Live: 64
+	Protocol: TCP (6)
+	Header Checksum: 0x6df3
+	Source Address: 10.33.182.178
+	Destination Address: 192.55.52.40
+
+Transmission Control Protocol, Src Port: 33971, Dst Port: 80, Seq: 3063197879, Len: 0
+	Source Port: 33971
+	Destination Port: 80
+	[TCP Segment Len: 0]
+	Sequence Number: 3063197879
+	Acknowledgment Number: 0
+	1010 .... = Header Length: 40 Bytes (10)
+	Flags: 0x002 (SYN)
+		000. .... = Reserved Not set
+		...0 .... .... = Nonce: Not set
+		.... 0... .... = Congestion Window Reduced (CWR): Not set
+		.... .0.. .... = ECN-Echo: Not set
+		.... ..0. .... = Urgent: Not set
+		.... ...0 .... = Acknowledgment: Not set
+		.... .... 0... = Push: Not set
+		.... .... .0.. = Reset: Not set
+		.... .... ..1. = Syn: Set
+		.... .... ...0 = Fin: Not set
+		[TCP Flags: ........S.]
+	Window: 5840
+	Checksum: 0xe823
+	Urgent Pointer: 0
+	Options: (20 bytes)
+		TCP Option - Maximum Segment Size 
+			Kind: Maximum Segment Size (2)
+			Length: 4
+		TCP Option - SACK Permitted 
+			Kind: SACK Permitted (4)
+			Length: 2
+		TCP Option - Time Stamp Option 
+			Kind: TSOPT - Time Stamp Option (8)
+			Length: 10
+		TCP Option - No-Operation 
+			Kind: No-Operation (1)
+		TCP Option - Window Scale 
+			Kind: Window Scale (3)
+			Length: 3
+
+Hypertext Transfer Protocol
+	
+
+Trame 5 : ---------------------------
+00 50 7F 05 7d 40 00 10 a4 86 2d 0b 08 00 45 00 00 3c 17 96 40 00 40 06 6d f3 0a 21 b6 b2 c0 37 
+34 28 84 b3 00 50 b6 94 b0 B7 00 00 00 00 a0 02 
+16 d0 E8 23 00 00 02 04 05 b4 04 02 08 0a 00 6f A7 21 00 00 00 00 01 03 03 00 
+
+Ethernet II, Src: 00:10:a4:86:2d:0b, Dst: 00:50:7F:05:7d:40
+	Destination : 00:50:7F:05:7d:40 
+	Source : 00:10:a4:86:2d:0b 
+	Type : IPV4 (0x0800)
+
+Internet Protocol Version 4, Src: 10.33.182.178, Dst: 192.55.52.40
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field(TOS): 0x00
+	Total Length: 60
+	Identification: 0x1796 (6038)
+	Flags: 0x40
+		0... .... = Reserved bit: Not set
+		.1.. .... = Don't fragment: Set
+		..0. .... = More fragments: Not set
+	Fragment Offset: 0
+	Time to Live: 64
+	Protocol: TCP (6)
+	Header Checksum: 0x6df3
+	Source Address: 10.33.182.178
+	Destination Address: 192.55.52.40
+
+Transmission Control Protocol, Src Port: 33971, Dst Port: 80, Seq: 3063197879, Len: 0
+	Source Port: 33971
+	Destination Port: 80
+	[TCP Segment Len: 0]
+	Sequence Number: 3063197879
+	Acknowledgment Number: 0
+	1010 .... = Header Length: 40 Bytes (10)
+	Flags: 0x002 (SYN)
+		000. .... = Reserved Not set
+		...0 .... .... = Nonce: Not set
+		.... 0... .... = Congestion Window Reduced (CWR): Not set
+		.... .0.. .... = ECN-Echo: Not set
+		.... ..0. .... = Urgent: Not set
+		.... ...0 .... = Acknowledgment: Not set
+		.... .... 0... = Push: Not set
+		.... .... .0.. = Reset: Not set
+		.... .... ..1. = Syn: Set
+		.... .... ...0 = Fin: Not set
+		[TCP Flags: ........S.]
+	Window: 5840
+	Checksum: 0xE823
+	Urgent Pointer: 0
+	Options: (20 bytes)
+		TCP Option - Maximum Segment Size 
+			Kind: Maximum Segment Size (2)
+			Length: 4
+		TCP Option - SACK Permitted 
+			Kind: SACK Permitted (4)
+			Length: 2
+		TCP Option - Time Stamp Option 
+			Kind: TSOPT - Time Stamp Option (8)
+			Length: 10
+		TCP Option - No-Operation 
+			Kind: No-Operation (1)
+		TCP Option - Window Scale 
+			Kind: Window Scale (3)
+			Length: 3
+
+Hypertext Transfer Protocol
+	
+
+Trame 6 : ---------------------------
+Erreur : Ligne incomplete en position 5 de la trame 6
+

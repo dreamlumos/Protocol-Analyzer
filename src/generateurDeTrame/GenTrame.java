@@ -105,7 +105,7 @@ public class GenTrame {
 		try{
 			for(int i=1; i <= nbOctets; i++ ) {
 				if(isOctet(lignecourante[i])) {
-					tram.addOctets(lignecourante[i]);
+					tram.addOctet(lignecourante[i]);
 				}	
 			}
 		} catch(IndexOutOfBoundsException e) {
