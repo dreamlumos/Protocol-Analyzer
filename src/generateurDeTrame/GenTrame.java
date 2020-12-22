@@ -13,118 +13,110 @@ public class GenTrame {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line = br.readLine();
 		String line2;
-		Trame tram=null;
+		Trame tram = null;
 		String[] lignecourante;
-		String[] lignesuivante=null;
-		int positionOffset=0;
+		String[] lignesuivante = null;
+		int positionOffset = 0;
 		int nbrOctets = 0; //nombres d'octets pour chaque ligne
 		
 		while (line != null) {
 			
 			lignecourante = line.split("[ ]+");
 			
-			if(lignecourante.length!=0 && isOffset(lignecourante[0], "")) {
-				//Premiere ligne de la tramme (le offset est egale a zero)
-				if((Integer.parseInt(lignecourante[0], 16))==0) {
-					if(tram!=null) {
-						if(!trames.getTrames().contains(tram))
+			if(!(lignecourante.length != 0) || !isOffset(lignecourante[0], "")) {
+				line = br.readLine();
+			} else {
+				
+				//Premiere ligne de la trame (le offset est egal a zero)
+				if((Integer.parseInt(lignecourante[0], 16)) == 0) {
+					if(tram != null) {
+						if(!trames.getTrames().contains(tram)) {
 							trames.addTrame(tram);
+						}
 					}
 					tram = new Trame();
 				}
-				if(tram.trameValide()) {
-				tram.addOffset(Integer.parseInt(lignecourante[0], 16) , positionOffset);
-				positionOffset++;
-				do{
-					line2 = br.readLine();
-					if(line2!=null) {lignesuivante = line2.split("[ ]+");
-					}
-					else break;
-				}while(lignesuivante.length==0||!isOffset(lignesuivante[0], ""));//trouver le procahin offset valide ou null
-				if(line2!=null&&lignesuivante.length!=0){
-					lignesuivante = line2.split("[ ]+");//pour compiler a la sortie du do while
-						if((Integer.parseInt(lignesuivante[0], 16))==0&&positionOffset-1!=0) {//cas de la derniere ligne de chaque trame
+				
+				if(!tram.trameValide()) {
+					line = br.readLine();
+				} else {
+					tram.addOffset(Integer.parseInt(lignecourante[0], 16), positionOffset);
+					positionOffset++;
+					do{
+						line2 = br.readLine();
+						if(line2!=null) {
+							lignesuivante = line2.split("[ ]+");
+						}
+						else break;
+					} while(lignesuivante.length==0||!isOffset(lignesuivante[0], ""));//trouver le prochain offset valide ou null
+				
+					if(line2!=null && lignesuivante.length!=0){
+						
+						lignesuivante = line2.split("[ ]+");//pour compiler a la sortie du do while
+						
+						if((Integer.parseInt(lignesuivante[0], 16))==0 && positionOffset-1!=0) {//cas de la derniere ligne de chaque trame
 							/* taille tram - dernieroffset */
-							nbrOctets =14 + Integer.parseInt(tram.getoctets().get(16),16) + Integer.parseInt(tram.getoctets().get(17),16)-Integer.parseInt(lignecourante[0], 16);
-							try{
-								for(int i=1; i <= nbrOctets; i++ ) {
-								if(isOctet(lignecourante[i])) {
-									tram.addOctets(lignecourante[i]);
-								}	
-							}
-							}catch(IndexOutOfBoundsException e) {
-								tram.trameInvalide(positionOffset);
-							}
+							nbrOctets = 14 + Integer.parseInt(tram.getOctets().get(16),16) + Integer.parseInt(tram.getOctets().get(17),16)-Integer.parseInt(lignecourante[0], 16);
+							test(nbrOctets, tram, lignecourante, positionOffset);
 							positionOffset=0;
 							line=line2;
-						}
-						else {
+						} else {
 							if(isOffset(lignesuivante[0], lignecourante[0])) {//verifier si offset plus grand ou bien ignorer
 								nbrOctets= Integer.parseInt(lignesuivante[0], 16) - Integer.parseInt(lignecourante[0], 16);
-								try{
-									for(int i=1; i <= nbrOctets; i++ ) {
-									if(isOctet(lignecourante[i])) {
-										tram.addOctets(lignecourante[i]);
-									}
-								}
-								}catch(IndexOutOfBoundsException e) {
-									tram.trameInvalide(positionOffset);
-									positionOffset=0;
+								if (!test(nbrOctets, tram, lignecourante, positionOffset)) {
+									positionOffset = 0;
 								}
 								line=line2;
-							}
-							else {
+							} else {
 								if(Integer.parseInt(lignesuivante[0], 16)==0)tram.trameInvalide(positionOffset);
-
 								positionOffset--;
-
-							}
-
-						}
-
-					}
-				else {
-					//cas derniere trame
-					/* taille tram - dernieroffset */
-					if(tram.getoctets().size()>17) {
-						nbrOctets =14 + Integer.parseInt(tram.getoctets().get(16)+tram.getoctets().get(17),16)-Integer.parseInt(lignecourante[0], 16);
-						try{
-							for(int i=1; i <= nbrOctets; i++ ) {
-							if(isOctet(lignecourante[i])) {
-								tram.addOctets(lignecourante[i]);
 							}
 						}
-						}catch(IndexOutOfBoundsException e) {
+
+					} else { //cas derniere trame
+						/* taille tram - dernieroffset */
+						if(tram.getOctets().size()>17) {
+							nbrOctets = 14 + Integer.parseInt(tram.getOctets().get(16)+tram.getOctets().get(17),16)-Integer.parseInt(lignecourante[0], 16);
+							if (!test(nbrOctets, tram, lignecourante, positionOffset)) {
+								positionOffset = 0;
+							}
+
+						} else {
 							tram.trameInvalide(positionOffset);
 							positionOffset=0;
 						}
-						finally {
-							trames.addTrame(tram);
-							tram=null;
-							line=br.readLine();
-						}
-					}
-					else {
-						tram.trameInvalide(positionOffset);
 						trames.addTrame(tram);
-						tram=null;
-						positionOffset=0;
-						line=br.readLine();
+						tram = null;
+						line = br.readLine();
 					}
 				}
 			}
-			else {
-				line=br.readLine();
-			}
-		}
-			else line=br.readLine();
-		} 
+		} //endwhile
 
+		
+		for(Trame tram2 : trames.getTrames()) {
+			tram2.createFrame();
+		}
+		
 		br.close();
 	}
-			
+	
+	private static boolean test(int nbOctets, Trame tram, String[] lignecourante, int positionOffset) {
+		try{
+			for(int i=1; i <= nbOctets; i++ ) {
+				if(isOctet(lignecourante[i])) {
+					tram.addOctets(lignecourante[i]);
+				}	
+			}
+		} catch(IndexOutOfBoundsException e) {
+			tram.trameInvalide(positionOffset);
+			return false;
+		}
+		return true;
+	}
+	
 	/* Teste si c'est un octet en hexa */
-	private static boolean isOctet(String s) { 
+	public static boolean isOctet(String s) { 
 		if(s.length()==2) {
 			char lettre1= s.charAt(0);
 			char lettre2= s.charAt(1);

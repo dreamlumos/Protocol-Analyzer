@@ -13,7 +13,7 @@
 0040 2b 48 f5
 
 /* Trame 2
- * Test : Octets invalides
+ * Test : Octets de la couche Transport vides
  */
 0000 08 00 20 0a ac 96 08 00 20 0a 70 66 08 00 4f 00
 0010 00 3c cb c9 00 00 ff 06 b9 7f 84 e3 3d 05 c0 21 

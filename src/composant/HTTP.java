@@ -1,13 +1,14 @@
 package composant;
 
-public class HTTP {
+import java.util.List;
 
-	private String http;
+public class HTTP implements DataUnit {
+
+	private List<String> data;
 	
-	/* http must be a String of bytes separated by spaces */
-	public HTTP(String http) {
-		this.http = http;
-		// check if HTTP?
+	/* data must be a String of bytes separated by spaces */
+	public HTTP(List<String> data) {
+		this.data = data;
 	}
 	
 	@Override
@@ -16,8 +17,8 @@ public class HTTP {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Hypertext Transfer Protocol\n\t");
 		
-		for (int i = 0; i < http.length(); i += 3) {
-			String oneByte = http.substring(i, i+2);
+		for (int i = 0; i < data.size(); i++) {
+			String oneByte = data.get(i);
 			char ch = (char)Integer.parseInt(oneByte, 16);
 		    sb.append(ch);
 		    
